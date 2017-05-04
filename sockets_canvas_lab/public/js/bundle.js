@@ -22042,28 +22042,31 @@ class Canvas extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      canvas: null,
-      context: null
-    };
+    this.canvas = null;
+    this.context = null;
+    this.state = {};
   }
 
   drawRectangle(event) {
-    this.state.context.fillStyle = 'red';
-    this.state.context.fillRect(event.x, event.y, 10, 10);
+
+    console.log('clicked');
+    console.log(event.clientX);
+    // console.log({event.target.value}.x)
+    this.context.fillStyle = 'red';
+    this.context.fillRect(event.clientX, event.clientY, 10, 10);
   }
 
   componentDidMount() {
-    const canvas = document.querySelector('canvas');
-    const context = canvas.getContext('2d');
-    this.setState({ canvas: canvas, context: context });
+    this.canvas = document.querySelector('canvas');
+    this.context = this.canvas.getContext('2d');
+    // this.setState({canvas: canvas, context: context})
   }
 
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('canvas', { width: '500', height: '500' })
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('canvas', { width: '500', height: '500', onClick: this.drawRectangle.bind(this) })
     );
   }
 

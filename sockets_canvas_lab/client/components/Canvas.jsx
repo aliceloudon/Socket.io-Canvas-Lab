@@ -4,27 +4,32 @@ class Canvas extends React.Component {
 
   constructor(props){
     super(props)
+    this.canvas = null
+    this.context = null
     this.state = {
-      canvas: null,
-      context:  null
     }
   }
 
   drawRectangle(event){
-    this.state.context.fillStyle = 'red'
-    this.state.context.fillRect(event.x, event.y, 10, 10)
+    
+    console.log('clicked')
+    console.log(event.clientX)
+    // console.log({event.target.value}.x)
+    this.context.fillStyle = 'red'
+    this.context.fillRect(event.clientX, event.clientY, 10, 10)
+  
   }
 
   componentDidMount(){
-    const canvas = document.querySelector('canvas')
-    const context = canvas.getContext('2d')
-    this.setState({canvas: canvas, context: context})
+    this.canvas = document.querySelector('canvas')
+    this.context = this.canvas.getContext('2d')
+    // this.setState({canvas: canvas, context: context})
   }
 
   render(){
     return (
       <div>
-        <canvas width = "500" height = "500"></canvas>
+        <canvas width = "500" height = "500" onClick={this.drawRectangle.bind(this)} ></canvas>
       </div>
     )
   }
